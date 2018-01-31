@@ -40,6 +40,21 @@ How?
   ...
   }
   ```
+  
+### Programming Conventions
+  + Argument lists are documented by local variables declared immediately after function declaration.  When possible declare variable to be immutable via ```local -r```.
+  
+    Example
+    ````
+    msg__basic(){                                                                                                                                 local -r msg="$1"
+        local -r msgType="$2"
+        local -r outputFile="$3"
+        local -ri msgCallerFrame="$4"
+        ...
+    }
+    
+    
+    
 ### Component Composition
 WIP...
 
