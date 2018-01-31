@@ -12,6 +12,39 @@ How?
 + Dependency inversion principle - One can certainly create an interface/abstaction and apply function overriding, mentioned when discussing Open/Close, to realize inversion. 
 
  ### Source File Conventions
- + Decide on a meanginful prefix that will be assigned to all elements declared in a Bash source file.  This prefix behaves like a namespace or golang package name.  Prefixes are always terminated by an underscore.
- Example:
- The "msg_" prefix 
+ + Decide on a meanginful prefix, representing a cohesive responsibility, that will be assigned to all elements declared in a Bash source file.  This prefix behaves like a namespace or golang package name.  Prefixes are always terminated by an underscore.
+ 
+    Example
+    
+    See [msg.source.sh](https://github.com/WhisperingChaos/msg.source.sh/blob/master/component/msg.source.sh).  This bash file cohesively packages a logging interface and default implement that can be called by other Bash functions. Note that every function and other bash programming elements, like global ENVIRONMENT variables, are prefixed by "msg_".
+
+  + Create a source file to contain these cohesive elements.  The source file name must be a combination of the prefix, less the trailing underscore, concatenated with ```.source.sh```.  This naming convention is important to the [Component Composition]() process. 
+  
+  Example
+    
+    See [msg.source.sh](https://github.com/WhisperingChaos/msg.source.sh/blob/master/component/msg.source.sh).
+    
+  + Public Elements in a source file simply begin with a prefix, followed by the element's name.
+  
+  Example
+  ```
+  msg_inform(){
+  ...
+  }
+  ```
+  + Private Elements in a source file begin with a prefix, followed by an element's name, however, the element's name begins with an underscore ("_").
+  
+  Example
+  ```
+  msg__basic(){
+  ...
+  }
+  ```
+### Component Composition
+WIP...
+
+### Terms
+#### Public Element
+A Bash language element, such as a function, that can be directly referenced by expressions declared in source files external to the one containing its definition.
+#### Private Element
+A Bash language element, such as an environment varialbe, that must only be directly referenced by expressions declared in the source file that contains its definition.
