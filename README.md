@@ -20,7 +20,7 @@ How?
 
   + Create a source file to contain these cohesive elements.  The source file name must be a combination of the prefix, less the trailing underscore, concatenated with ```.source.sh```.  This naming convention is important to the [Component Composition]() process. 
   
-  Example
+    Example
     
     See [msg.source.sh](https://github.com/WhisperingChaos/msg.source.sh/blob/master/component/msg.source.sh).
     
