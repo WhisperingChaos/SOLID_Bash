@@ -26,7 +26,7 @@ How?
     
   + Public Elements in a source file simply begin with a prefix, followed by the element's name.
   
-  Example
+    Example
   ```
   msg_inform(){
   ...
@@ -34,7 +34,7 @@ How?
   ```
   + Private Elements in a source file begin with a prefix, followed by an element's name, however, the element's name begins with an underscore ("_").
   
-  Example
+    Example
   ```
   msg__basic(){
   ...
