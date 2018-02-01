@@ -42,7 +42,7 @@ How?
   ```
   
 ### Programming Conventions
-  + Argument lists are documented by local variables declared immediately after function declaration.  When possible declare variable to be immutable via ```local -r```.
+  + Argument lists are documented by local variables (see Bash [declare](https://www.gnu.org/software/bash/manual/html_node/Bash-Builtins.html#Bash-Builtins)) specified immediately after a function's declaration.  When possible declare the variable to be immutable via ```local -r```.  Also when applicable, use local's -i option to differenciate numeric arguments from usual untyped string ones.
   
     Example
     ```
@@ -55,7 +55,12 @@ How?
     }
     ```
     
-    
+  + Although not explicitly supported, local variable names can be passed to a function enabling the function to return its output(s) to the caller, similar to call by reference mechanism supported by most other programming languages.  This mechanism can be simulated by passing a the name of a caller's varible to the called function then before returning to the caller, the function assigns the passed variable name the computed output value via [eval](https://tiswww.case.edu/php/chet/bash/bashref.html#Bourne-Shell-Builtins).
+  
+  Example
+  ```
+  
+  
 ### Component Composition
 WIP...
 
