@@ -24,7 +24,7 @@ How?
     
     See [msg.source.sh](https://github.com/WhisperingChaos/msg.source.sh/blob/master/component/msg.source.sh).
     
-  + Public Elements in a source file simply begin with a prefix, followed by the element's name.
+  + [Public Element](#public-element)s in a source file simply begin with a prefix, followed by the element's name.
   
     Example
   ```
@@ -32,7 +32,7 @@ How?
   ...
   }
   ```
-  + Private Elements in a source file begin with a prefix, followed by an element's name, however, the element's name begins with an underscore ("_").
+  + [Private Element](#private-element)s in a source file begin with a prefix, followed by an element's name, however, the element's name begins with an underscore ("_").
   
     Example
   ```
@@ -41,7 +41,7 @@ How?
   }
   ```
   
-### Programming Conventions
+  ### Programming Conventions
   + Argument lists are documented by local variables (see Bash [declare](https://www.gnu.org/software/bash/manual/html_node/Bash-Builtins.html#Bash-Builtins)) specified immediately after a function's declaration.  When possible declare the variable to be immutable via ```local -r```.  Also when applicable, use local's -i option to differenciate numeric arguments from usual untyped string ones.
   
     Example
@@ -59,10 +59,13 @@ How?
   
   Example
   ```
+  ```
   
   
 ### Component Composition
-WIP...
+
+[Component Composition](https://github.com/WhisperingChaos/sourcer.sh/blob/master/component/base/sourcer.source.sh)
+
 
 ### Terms
 #### Public Element
