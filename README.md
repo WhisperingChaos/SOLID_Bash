@@ -57,9 +57,29 @@ How?
     
   + Although not explicitly supported, local variable names can be passed to a function enabling the function to return its output(s) to the caller, similar to call by reference mechanism supported by most other programming languages.  This mechanism can be simulated by passing a the name of a caller's varible to the called function then before returning to the caller, the function assigns the passed variable name the computed output value via [eval](https://tiswww.case.edu/php/chet/bash/bashref.html#Bourne-Shell-Builtins).
   
-  Example
-  ```
-  ```
+   Example
+   ```
+msg__basic(){
+...
+    local pasFrameDetail  # passed variable to receive output of call
+   	msg__call_frame "$msgCallerFrame" 'pasFrameDetail'
+    # pasFrameDetail contains human readable call stack information
+...
+}
+
+msg__call_frame(){
+    local -ri callLvl=$1
+    local -r rtnCallFrame="$2" # value is now set to 'pasFrameDetail'
+   
+    local  callFrame=" file='${BASH_SOURCE[$callLvl+2]}'"
+    callFrame="$callFrame lineNo=${BASH_LINENO[$callLvl+1]}"
+    callFrame="$callFrame func='${FUNCNAME[$callLvl+2]}'"
+    # use of eval to set the value of the passed 'pasFrameDetail' variable to readable
+    # call stack information to return it to the caller. 
+    eval $rtnCallFrame\=\"\$callFrame\" 
+}
+
+ ``` 
   
   
 ### Component Composition
