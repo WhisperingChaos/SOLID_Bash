@@ -1,16 +1,21 @@
 # SOLID_Bash
-Reimagine [GNU Bash]() applying SOLID principles from a golang influenced perspective.
+Reimagine [GNU Bash](https://www.gnu.org/software/bash/) applying SOLID principles from a golang influenced perspective.
 
 ### SOLID Principles
 If unfamiliar, read [SOLID](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)).
 
 How?
 + Single Responsibility - Separate concerns into separate bash source files.  Use bash [source](https://en.wikipedia.org/wiki/Source_(command)) command to compose a Component.   
-+ Open/Close - Bash source files are open to extension but closed to modification.  Instead of directly altering the content of a source file employ Bash's function overriding mechanism to replace a function's provided behavior with the desired one.
++ Open/Close - Bash source files are open to extension but closed to modification.  Instead of directly altering the content of a source file employ Bash's function overriding(#function-overriding) mechanism to replace a function's provided behavior with the desired one.
 + Liskov substitution principle - What could one do with function overriding and an associative array?  Look to python for an answer...  Bash provides both mechanisms since its 4.0 release.  The combination of these language features enables the encoding of OO features such as virtual functions, method inheritance, and encapsulation of data members. 
 + Interface segregation principle - see Single Responsibility above, as separating concerns into separate bash source files partitions a Component's composite interface.
 + Dependency inversion principle - One can certainly create an interface/abstaction and apply function overriding, mentioned when discussing Open/Close, to realize inversion. 
 
+### Function Overriding ###
+A function's implementation can be replaced by creating another function with exactly the same name but whose body contains a different implementation.  The effect of overriding can occur:
++ "Statically" when lexically positioning the overriding function declaration.  The overriding declaration must appear lexically after its intended target as bash, if not diverted, executes statements starting from the top of a script's file to its bottom.  Given this order bash first interprets the function targeted for override then after further processing the file, it encounters the subsequent duplicate declaration and replaces the targeted function's body with the one defined by the subsequent one, thereby overriding the first (prior) declaration. 
++ "Dynamically" during run time.  Bash permits one to define/declare a function and its body inside another function or execute the [“`source“`](https://www.gnu.org/software/bash/manual/bash.html) statement.  When declared (nested) within an encapsulating function, a call to that function will cause bash to process the nested function declaration.  As it's processing the nested declaration, bash will include this function in its global namespace.  If a function already exists with the same name, bash replaces the existing function body with the new one.  The ```source``` statement achieves the same outcome via similar behavior.  However, this mechanism essentially encapsulates the overriding function(s) inside a file that's separate from the one that executes the ```source``` statement. 
+Note function overriding solely relies on the function's name.  It's up to the developer to ensure the overriding function consumes the same parameter list in the same order as its target.  Although the discussion above categorizes the overriding behavior as static/dynamic, there's only one mechanism - the dynamic one.  Since bash is interpreted as it executes, a script's execution behavior dictates when its function declarations are processed.  Therefore, lexical ordering emerges only when bash executes declarations in the lexical order defined within a script.
  ### Source File Conventions
  + Decide on a meanginful prefix, representing a cohesive responsibility, that will be assigned to all elements declared in a Bash source file.  This prefix behaves like a namespace or golang package name.  Prefixes are always terminated by an underscore.
  
